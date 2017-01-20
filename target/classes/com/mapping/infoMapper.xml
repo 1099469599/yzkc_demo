@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.infoMapper">
+	<resultMap id="BaseResultMap" type="com.model.info">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="cname" property="cname" jdbcType="VARCHAR" />
+		<result column="ctype" property="ctype" jdbcType="VARCHAR" />
+		<result column="cinfof" property="cinfof" jdbcType="VARCHAR" />
+		<result column="cinfos" property="cinfos" jdbcType="VARCHAR" />
+		<result column="cinfot" property="cinfot" jdbcType="VARCHAR" />
+		<result column="cimage" property="cimage" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, cname, ctype, cinfof, cinfos, cinfot, cimage
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.model.info">
+		insert into info (id, cname, ctype,
+		cinfof, cinfos, cinfot,
+		cimage)
+		values (#{id,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR},
+		#{ctype,jdbcType=VARCHAR},
+		#{cinfof,jdbcType=VARCHAR}, #{cinfos,jdbcType=VARCHAR}, #{cinfot,jdbcType=VARCHAR},
+		#{cimage,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.model.info">
+		insert into info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cname != null">
+				cname,
+			</if>
+			<if test="ctype != null">
+				ctype,
+			</if>
+			<if test="cinfof != null">
+				cinfof,
+			</if>
+			<if test="cinfos != null">
+				cinfos,
+			</if>
+			<if test="cinfot != null">
+				cinfot,
+			</if>
+			<if test="cimage != null">
+				cimage,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cname != null">
+				#{cname,jdbcType=VARCHAR},
+			</if>
+			<if test="ctype != null">
+				#{ctype,jdbcType=VARCHAR},
+			</if>
+			<if test="cinfof != null">
+				#{cinfof,jdbcType=VARCHAR},
+			</if>
+			<if test="cinfos != null">
+				#{cinfos,jdbcType=VARCHAR},
+			</if>
+			<if test="cinfot != null">
+				#{cinfot,jdbcType=VARCHAR},
+			</if>
+			<if test="cimage != null">
+				#{cimage,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.model.info">
+		update info
+		<set>
+			<if test="cname != null">
+				cname = #{cname,jdbcType=VARCHAR},
+			</if>
+			<if test="ctype != null">
+				ctype = #{ctype,jdbcType=VARCHAR},
+			</if>
+			<if test="cinfof != null">
+				cinfof = #{cinfof,jdbcType=VARCHAR},
+			</if>
+			<if test="cinfos != null">
+				cinfos = #{cinfos,jdbcType=VARCHAR},
+			</if>
+			<if test="cinfot != null">
+				cinfot = #{cinfot,jdbcType=VARCHAR},
+			</if>
+			<if test="cimage != null">
+				cimage = #{cimage,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.model.info">
+		update info
+		set cname = #{cname,jdbcType=VARCHAR},
+		ctype = #{ctype,jdbcType=VARCHAR},
+		cinfof = #{cinfof,jdbcType=VARCHAR},
+		cinfos = #{cinfos,jdbcType=VARCHAR},
+		cinfot = #{cinfot,jdbcType=VARCHAR},
+		cimage = #{cimage,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectAll" parameterType="com.model.info"
+		resultType="com.model.info">
+		select
+		<include refid="Base_Column_List" />
+		from info
+	</select>
+	<select id="select_html" parameterType="com.model.info"
+		resultType="com.model.info">
+		select
+		<include refid="Base_Column_List" />
+		from info
+		<where>
+			ctype like "%html%"
+		</where>
+	</select>
+	<select id="selectinfosByPage" resultType="com.model.info">
+		select
+		*
+		from
+		info
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="getinfosCount" resultType="long">
+		SELECT COUNT(*)
+		FROM
+		info
+	</select>
+	<!--模糊查询 -->
+	<select id="selectinfosByPageSearch" resultType="com.model.info">
+		select
+		*
+		from
+		info
+		where
+		cname
+		like
+		CONCAT(CONCAT('%', #{cname,jdbcType=VARCHAR}), '%')
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="getinfosCountSearch" resultType="long">
+		SELECT COUNT(*)
+		FROM
+		info
+		where
+		cname
+		like
+		CONCAT(CONCAT('%', #{cname,jdbcType=VARCHAR}), '%')
+	</select>
+</mapper>

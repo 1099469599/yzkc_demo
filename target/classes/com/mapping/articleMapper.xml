@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.articleMapper">
+	<resultMap id="BaseResultMap" type="com.model.article">
+		<id column="aid" property="aid" jdbcType="INTEGER" />
+		<result column="aname" property="aname" jdbcType="VARCHAR" />
+		<result column="ainfo" property="ainfo" jdbcType="VARCHAR" />
+		<result column="atime" property="atime" jdbcType="VARCHAR" />
+		<result column="atype" property="atype" jdbcType="VARCHAR" />
+		<result column="aup" property="aup" jdbcType="INTEGER" />
+		<result column="adown" property="adown" jdbcType="INTEGER" />
+		<result column="adetail" property="adetail" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		aid, aname, ainfo, atime, atype, aup, adown, adetail, pid
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from article
+		where aid = #{aid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from article
+		where aid = #{aid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.model.article">
+		insert into article (aid, aname, ainfo,
+		atime, atype, aup,
+		adown, adetail, pid
+		)
+		values (#{aid,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR},
+		#{ainfo,jdbcType=VARCHAR},
+		#{atime,jdbcType=VARCHAR}, #{atype,jdbcType=VARCHAR}, #{aup,jdbcType=INTEGER},
+		#{adown,jdbcType=INTEGER}, #{adetail,jdbcType=VARCHAR},
+		#{pid,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.model.article">
+		insert into article
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="aid != null">
+				aid,
+			</if>
+			<if test="aname != null">
+				aname,
+			</if>
+			<if test="ainfo != null">
+				ainfo,
+			</if>
+			<if test="atime != null">
+				atime,
+			</if>
+			<if test="atype != null">
+				atype,
+			</if>
+			<if test="aup != null">
+				aup,
+			</if>
+			<if test="adown != null">
+				adown,
+			</if>
+			<if test="adetail != null">
+				adetail,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="aid != null">
+				#{aid,jdbcType=INTEGER},
+			</if>
+			<if test="aname != null">
+				#{aname,jdbcType=VARCHAR},
+			</if>
+			<if test="ainfo != null">
+				#{ainfo,jdbcType=VARCHAR},
+			</if>
+			<if test="atime != null">
+				#{atime,jdbcType=VARCHAR},
+			</if>
+			<if test="atype != null">
+				#{atype,jdbcType=VARCHAR},
+			</if>
+			<if test="aup != null">
+				#{aup,jdbcType=INTEGER},
+			</if>
+			<if test="adown != null">
+				#{adown,jdbcType=INTEGER},
+			</if>
+			<if test="adetail != null">
+				#{adetail,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.model.article">
+		update article
+		<set>
+			<if test="aname != null">
+				aname = #{aname,jdbcType=VARCHAR},
+			</if>
+			<if test="ainfo != null">
+				ainfo = #{ainfo,jdbcType=VARCHAR},
+			</if>
+			<if test="atime != null">
+				atime = #{atime,jdbcType=VARCHAR},
+			</if>
+			<if test="atype != null">
+				atype = #{atype,jdbcType=VARCHAR},
+			</if>
+			<if test="aup != null">
+				aup = #{aup,jdbcType=INTEGER},
+			</if>
+			<if test="adown != null">
+				adown = #{adown,jdbcType=INTEGER},
+			</if>
+			<if test="adetail != null">
+				adetail = #{adetail,jdbcType=VARCHAR},
+			</if>
+			<if test="pid != null">
+				pid = #{pid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where aid = #{aid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.model.article">
+		update article
+		set aname = #{aname,jdbcType=VARCHAR},
+		ainfo = #{ainfo,jdbcType=VARCHAR},
+		atime = #{atime,jdbcType=VARCHAR},
+		atype = #{atype,jdbcType=VARCHAR},
+		aup = #{aup,jdbcType=INTEGER},
+		adown = #{adown,jdbcType=INTEGER},
+		adetail = #{adetail,jdbcType=VARCHAR},
+		pid = #{pid,jdbcType=INTEGER}
+		where aid = #{aid,jdbcType=INTEGER}
+	</update>
+	<select id="selectAll" parameterType="com.model.article"
+		resultType="com.model.article">
+		select
+		<include refid="Base_Column_List" />
+		from article
+		order by aid=#{aid,jdbcType=INTEGER}
+		ASC
+	</select>
+	<update id="updateSingleaup" parameterType="com.model.article">
+		update article
+		set aup = #{aup,jdbcType=INTEGER}+1
+		where
+		aid =#{aid,jdbcType=INTEGER}
+		and
+		aup=#{aup,jdbcType=INTEGER}
+	</update>
+	<update id="updateSingleadown" parameterType="com.model.article">
+		update article
+		set adown = #{adown,jdbcType=INTEGER}+1
+		where
+		aid =#{aid,jdbcType=INTEGER}
+		and
+		adown = #{adown,jdbcType=INTEGER}
+	</update>
+	<select id="selectArticlesByPage" resultType="com.model.article">
+		select
+		*
+		from
+		article
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="getArticlesCount" resultType="long">
+		SELECT COUNT(*)
+		FROM
+		article
+	</select>
+	<!--模糊查询 -->
+	<select id="selectArticlesByPageSearch" resultType="com.model.article">
+		select
+		*
+		from
+		article
+		where
+		aname
+		like
+		CONCAT(CONCAT('%', #{aname,jdbcType=VARCHAR}), '%')
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="getArticlesCountSearch" resultType="long">
+		SELECT COUNT(*)
+		FROM
+		article
+		where
+		aname
+		like
+		CONCAT(CONCAT('%', #{aname,jdbcType=VARCHAR}), '%')
+	</select>
+</mapper>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.login_userMapper">
+	<resultMap id="BaseResultMap" type="com.model.login_user">
+		<id column="lid" property="lid" jdbcType="INTEGER" />
+		<result column="luser" property="luser" jdbcType="VARCHAR" />
+		<result column="lpassword" property="lpassword" jdbcType="VARCHAR" />
+		<result column="ldetail" property="ldetail" jdbcType="VARCHAR" />
+		<result column="ltelephone" property="ltelephone" jdbcType="INTEGER" />
+		<result column="limage" property="limage" jdbcType="VARCHAR" />
+		<result column="ltype" property="ltype" jdbcType="VARCHAR" />
+		<result column="lusername" property="lusername" jdbcType="VARCHAR" />
+		<result column="laddress" property="laddress" jdbcType="VARCHAR" />
+		<result column="lextra" property="lextra" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		lid, luser, lpassword, ldetail, ltelephone, limage, ltype, lusername,
+		laddress, lextra
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from login_user
+		where lid = #{lid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from login_user
+		where lid = #{lid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.model.login_user">
+		insert into login_user (lid, luser, lpassword,
+		ldetail, ltelephone, limage,
+		ltype, lusername, laddress,
+		lextra)
+		values (#{lid,jdbcType=INTEGER}, #{luser,jdbcType=VARCHAR},
+		#{lpassword,jdbcType=VARCHAR},
+		#{ldetail,jdbcType=VARCHAR}, #{ltelephone,jdbcType=INTEGER}, #{limage,jdbcType=VARCHAR},
+		#{ltype,jdbcType=VARCHAR}, #{lusername,jdbcType=VARCHAR},
+		#{laddress,jdbcType=VARCHAR},
+		#{lextra,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.model.login_user">
+		insert into login_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="lid != null">
+				lid,
+			</if>
+			<if test="luser != null">
+				luser,
+			</if>
+			<if test="lpassword != null">
+				lpassword,
+			</if>
+			<if test="ldetail != null">
+				ldetail,
+			</if>
+			<if test="ltelephone != null">
+				ltelephone,
+			</if>
+			<if test="limage != null">
+				limage,
+			</if>
+			<if test="ltype != null">
+				ltype,
+			</if>
+			<if test="lusername != null">
+				lusername,
+			</if>
+			<if test="laddress != null">
+				laddress,
+			</if>
+			<if test="lextra != null">
+				lextra,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="lid != null">
+				#{lid,jdbcType=INTEGER},
+			</if>
+			<if test="luser != null">
+				#{luser,jdbcType=VARCHAR},
+			</if>
+			<if test="lpassword != null">
+				#{lpassword,jdbcType=VARCHAR},
+			</if>
+			<if test="ldetail != null">
+				#{ldetail,jdbcType=VARCHAR},
+			</if>
+			<if test="ltelephone != null">
+				#{ltelephone,jdbcType=INTEGER},
+			</if>
+			<if test="limage != null">
+				#{limage,jdbcType=VARCHAR},
+			</if>
+			<if test="ltype != null">
+				#{ltype,jdbcType=VARCHAR},
+			</if>
+			<if test="lusername != null">
+				#{lusername,jdbcType=VARCHAR},
+			</if>
+			<if test="laddress != null">
+				#{laddress,jdbcType=VARCHAR},
+			</if>
+			<if test="lextra != null">
+				#{lextra,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.model.login_user">
+		update login_user
+		<set>
+			<if test="luser != null">
+				luser = #{luser,jdbcType=VARCHAR},
+			</if>
+			<if test="lpassword != null">
+				lpassword = #{lpassword,jdbcType=VARCHAR},
+			</if>
+			<if test="ldetail != null">
+				ldetail = #{ldetail,jdbcType=VARCHAR},
+			</if>
+			<if test="ltelephone != null">
+				ltelephone = #{ltelephone,jdbcType=INTEGER},
+			</if>
+			<if test="limage != null">
+				limage = #{limage,jdbcType=VARCHAR},
+			</if>
+			<if test="ltype != null">
+				ltype = #{ltype,jdbcType=VARCHAR},
+			</if>
+			<if test="lusername != null">
+				lusername = #{lusername,jdbcType=VARCHAR},
+			</if>
+			<if test="laddress != null">
+				laddress = #{laddress,jdbcType=VARCHAR},
+			</if>
+			<if test="lextra != null">
+				lextra = #{lextra,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where lid = #{lid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.model.login_user">
+		update login_user
+		set luser = #{luser,jdbcType=VARCHAR},
+		lpassword = #{lpassword,jdbcType=VARCHAR},
+		ldetail = #{ldetail,jdbcType=VARCHAR},
+		ltelephone = #{ltelephone,jdbcType=INTEGER},
+		limage = #{limage,jdbcType=VARCHAR},
+		ltype = #{ltype,jdbcType=VARCHAR},
+		lusername = #{lusername,jdbcType=VARCHAR},
+		laddress = #{laddress,jdbcType=VARCHAR},
+		lextra = #{lextra,jdbcType=VARCHAR}
+		where lid = #{lid,jdbcType=INTEGER}
+	</update>
+	<select id="selectall" parameterType="com.model.login_user"
+		resultType="com.model.login_user">
+		select
+		*
+		from
+		login_user
+	</select>
+	<select id="selectright" parameterType="com.model.login_user"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from login_user
+		where
+		luser=#{luser,jdbcType=VARCHAR}
+		AND
+		lpassword=#{lpassword,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByluser" parameterType="com.model.login_user"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from login_user
+		where
+		luser=#{luser,jdbcType=VARCHAR}
+	</select>
+	<select id="selectpasswordright" parameterType="com.model.login_user"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from login_user
+		where
+		lpassword=#{lpassword,jdbcType=VARCHAR}
+	</select>
+	<update id="updateByidandpassword" parameterType="com.model.login_user">
+		update
+		login_user
+		set
+		lpassword=#{lpassword,jdbcType=VARCHAR}
+		where
+		lid=#{lid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByidandimage" parameterType="com.model.login_user">
+		update
+		login_user
+		set
+		limage=#{limage,jdbcType=VARCHAR}
+		where
+		lid=#{lid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByMyset" parameterType="com.model.login_user">
+		update
+		login_user
+		set
+		lusername=#{lusername,jdbcType=VARCHAR}
+		,
+		ltelephone=#{ltelephone,jdbcType=INTEGER}
+		,
+		laddress=#{laddress,jdbcType=VARCHAR}
+		,
+		ltype=#{ltype,jdbcType=VARCHAR}
+		where
+		lid=#{lid,jdbcType=INTEGER}
+	</update>
+	<select id="selectusersByPage" resultType="com.model.login_user">
+		select
+		*
+		from
+		login_user
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="getusersCount" resultType="long">
+		SELECT COUNT(*)
+		FROM
+		login_user
+	</select>
+</mapper>
