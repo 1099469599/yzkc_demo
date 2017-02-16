@@ -29,5 +29,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/VC练习用文件夹/eclipse/yzkc_demo/src/main/webapp/WEB-INF/lib/ueditor-1.1.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
